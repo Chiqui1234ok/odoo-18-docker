@@ -1,0 +1,21 @@
+echo "Se va a copiar './odoo.service' hacia '/etc/systemd/system/odoo.service'."
+sleep 2
+cp odoo.service /etc/systemd/system/odoo.service
+
+echo "Se va a recargar los servicios de systemd"
+sleep 1
+systemctl daemon-reload
+
+echo "Se va a habilitar el servicio"
+sleep 2
+systemctl enable odoo.service
+systemctl start odoo.service
+
+# Delay mayor para darle tiempo al servicio Docker a que inicie
+echo "Estado del servicio..."
+sleep 1
+echo "Se ejecuta: 'systemctl status odoo'"
+sleep 1
+echo "Cargando..."
+sleep 3
+systemctl status odoo.service

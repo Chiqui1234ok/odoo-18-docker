@@ -1,0 +1,14 @@
+[Unit]
+Description=Odoo Docker Service
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/odoo-18-docker
+ExecStart=/usr/bin/docker compose up
+User=root
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
