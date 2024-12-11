@@ -9,13 +9,10 @@ systemctl daemon-reload
 echo "Se va a habilitar el servicio"
 sleep 2
 systemctl enable odoo.service
-systemctl start odoo.service
-
 # Delay mayor para darle tiempo al servicio Docker a que inicie
-echo "Estado del servicio..."
+echo "Se va a iniciar el servicio. Si es la primera vez, Docker descargara varias dependencias. Esto puede terdar unos minutos"
 sleep 1
+systemctl start odoo.service
 echo "Se ejecuta: 'systemctl status odoo'"
 sleep 1
-echo "Cargando..."
-sleep 3
 systemctl status odoo.service
