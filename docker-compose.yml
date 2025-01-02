@@ -18,7 +18,9 @@ services:
     ports:
       - "80:8069"
     environment:
-      HOST: db
+	    USER: ${POSTGRES_USER}
+	    PASSWORD: ${POSTGRES_PASSWORD}
+      HOST: ${POSTGRES_HOST}
     volumes:
       - ./etc/odoo.conf:/etc/odoo.conf
       - ./odoo_data:/var/lib/odoo
