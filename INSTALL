@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# Verifica si el usuario es root (ID de usuario 0)
+if [ "$(id -u)" -ne 0 ]; then
+    echo "Este script debe ejecutarse como root."
+    exit 1
+fi
+
+# Verifica si se pasa un argumento
+if [ "$1" == "folders" ]; then
+    # Crear la carpeta 'odoo_data'
+    mkdir odoo_data
+    # Crear la carpeta 'db_data'
+    mkdir db_data
+    # Mostrar un mensaje indicando que las carpetas han sido creadas
+    echo 'Se listan las carpetas creadas'
+    # Listar las carpetas que contienen '_data' 
+    ls -la | grep '_data'
+elif [ "$1" == "db" ]; then
+    echo "Se instalarán las dependencias de Odoo y PostgreSQL, luego se ejecutará la imágen Docker y se inicializará la base de datos."
+    sleep 5
+    docker compose up -d
+    echo "Esperá..."
+    if [ -f .env ]; then
+        echo "Se cargaron las variables de entorno para conectarse e inicializar la base de datos."
+        source .env
+    else
+        echo "Debería haber un archivo \".env\" en la misma carpeta que este script, pero no existe. Favor de leer el tomo \"Instalación del servicio • Odoo 18\", título \"Crear el archivo\"."
+        exit 1
+    fi
+    sleep 5
+    docker exec -it odoo odoo \
+    --db_host=${POSTGRES_HOST} \
+    --db_user=${POSTGRES_USER} \
+    --db_password=${POSTGRES_PASSWORD} \
+    -d odoo-app \
+    -i base \
+    --without-demo=all \
+    --xmlrpc-port=8070
+elif [ "$1" == "service" ]; then
+    echo "Se va a copiar './services/odoo.service' hacia '/etc/systemd/system/odoo.service'."
+    sleep 2
+    cp ./services/odoo.service /etc/systemd/system/odoo.service
+    echo "Se va a recargar los servicios de systemd"
+    sleep 1
+    systemctl daemon-reload
+    echo "Se va a habilitar el servicio"
+    sleep 1
+    systemctl enable odoo.service
+    # Delay mayor para darle tiempo al servicio Docker a que inicie
+    echo "Se va a iniciar el servicio. Si es la primera vez, Docker descargara varias dependencias. Esto puede terdar unos minutos"
+    sleep 1
+    systemctl start odoo.service
+    echo "Se ejecuta: 'systemctl status odoo'"
+    sleep 1
+    systemctl status odoo.service
+else
+    # Si el parámetro no es reconocido, mostrar un mensaje de ayuda
+    echo "Uso: ./INSTALL {folders|service}"
+fi
