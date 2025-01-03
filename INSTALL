@@ -14,6 +14,8 @@ if [ "$1" == "folders" ]; then
     chown 100:101 -R ./odoo_data
     # Lo mismo con 'etc'
     chown 100:101 -R ./etc
+    # Y con el archivo ".env"
+    chown 100:101 .env
     # Crear la carpeta 'db_data'
     mkdir db_data
     # Asignar permisos a dicha carpeta, para el usuario "postgre" del contenedor
