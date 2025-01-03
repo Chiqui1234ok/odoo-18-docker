@@ -25,7 +25,8 @@ if [ "$1" == "folders" ]; then
 elif [ "$1" == "db" ]; then
     echo "Se instalarán las dependencias de Odoo y PostgreSQL, luego se ejecutará la imágen Docker y se inicializará la base de datos."
     if [ -f .env ]; then
-        echo "Se cargaron las variables de entorno para conectarse e inicializar la base de datos."
+        echo "✅"
+        echo -e "\033[32mSe cargaron las variables de entorno para conectarse e inicializar la base de datos.\033[0m"
         source .env
     else
         echo "⚠️"
@@ -46,7 +47,8 @@ elif [ "$1" == "db" ]; then
     --xmlrpc-port=8070
 elif [ "$1" == "service" ]; then
     if [ -f .env ]; then
-        echo "Se cargaron las variables de entorno para conectarse e inicializar la base de datos."
+        echo "✅"
+        echo -e "\033[32mSe cargaron las variables de entorno para conectarse e inicializar la base de datos.\033[0m"
         source .env
     else
         echo "⚠️"
