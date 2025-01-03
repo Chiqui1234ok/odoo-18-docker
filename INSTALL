@@ -44,6 +44,13 @@ elif [ "$1" == "db" ]; then
     --without-demo=all \
     --xmlrpc-port=8070
 elif [ "$1" == "service" ]; then
+    if [ -f .env ]; then
+        echo "Se cargaron las variables de entorno para conectarse e inicializar la base de datos."
+        source .env
+    else
+        echo "Debería haber un archivo \".env\" en la misma carpeta que este script, pero no existe. Favor de leer el tomo \"Instalación del servicio • Odoo 18\", título \"Crear el archivo\"."
+        exit 1
+    fi
     echo "Se va a copiar './services/odoo.service' hacia '/etc/systemd/system/odoo.service'."
     sleep 2
     cp ./services/odoo.service /etc/systemd/system/odoo.service
