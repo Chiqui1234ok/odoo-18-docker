@@ -28,7 +28,8 @@ elif [ "$1" == "db" ]; then
         echo "Se cargaron las variables de entorno para conectarse e inicializar la base de datos."
         source .env
     else
-        echo "Debería haber un archivo \".env\" en la misma carpeta que este script, pero no existe. Favor de leer el tomo \"Instalación del servicio • Odoo 18\", título \"Crear el archivo\"."
+        echo "⚠️"
+        echo -e "\033[31mDebería haber un archivo \".env\" en la misma carpeta que este script, pero no existe. Favor de leer el tomo \"Instalación del servicio • Odoo 18\", título \"Crear el archivo\".\033[0m"
         exit 1
     fi
     sleep 5
@@ -48,7 +49,8 @@ elif [ "$1" == "service" ]; then
         echo "Se cargaron las variables de entorno para conectarse e inicializar la base de datos."
         source .env
     else
-        echo "Debería haber un archivo \".env\" en la misma carpeta que este script, pero no existe. Favor de leer el tomo \"Instalación del servicio • Odoo 18\", título \"Crear el archivo\"."
+        echo "⚠️"
+        echo -e "\033[31mDebería haber un archivo \".env\" en la misma carpeta que este script, pero no existe. Favor de leer el tomo \"Instalación del servicio • Odoo 18\", título \"Crear el archivo\".\033[0m"
         exit 1
     fi
     echo "Se va a copiar './services/odoo.service' hacia '/etc/systemd/system/odoo.service'."
