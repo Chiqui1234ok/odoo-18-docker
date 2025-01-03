@@ -17,7 +17,7 @@ if [ "$1" == "folders" ]; then
     # Crear la carpeta 'db_data'
     mkdir db_data
     # Asignar permisos a dicha carpeta, para el usuario "postgre" del contenedor
-    chown 999:999 -R ./odoo_data
+    chown 999:999 -R ./db_data
     # Mostrar un mensaje indicando que las carpetas han sido creadas
     echo 'Se listan las carpetas creadas'
     # Listar las carpetas que contienen '_data' 
