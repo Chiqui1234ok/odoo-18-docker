@@ -10,10 +10,12 @@ fi
 if [ "$1" == "folders" ]; then
     # Crear la carpeta 'odoo_data'
     mkdir odoo_data
-    chown odoo:odoo -R odoo_data
+    # Asignar permisos a dicha carpeta, para el usuario "odoo" del contenedor
+    chown 100:101 -R ./odoo_data
     # Crear la carpeta 'db_data'
     mkdir db_data
-    chown odoo:odoo -R db_data
+    # Asignar permisos a dicha carpeta, para el usuario "odoo" del contenedor
+    chown 100:101 -R ./etc
     # Mostrar un mensaje indicando que las carpetas han sido creadas
     echo 'Se listan las carpetas creadas'
     # Listar las carpetas que contienen '_data' 
