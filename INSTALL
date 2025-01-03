@@ -12,10 +12,12 @@ if [ "$1" == "folders" ]; then
     mkdir odoo_data
     # Asignar permisos a dicha carpeta, para el usuario "odoo" del contenedor
     chown 100:101 -R ./odoo_data
+    # Lo mismo con 'etc'
+    chown 100:101 -R ./etc
     # Crear la carpeta 'db_data'
     mkdir db_data
-    # Asignar permisos a dicha carpeta, para el usuario "odoo" del contenedor
-    chown 100:101 -R ./etc
+    # Asignar permisos a dicha carpeta, para el usuario "postgre" del contenedor
+    chown 999:999 -R ./odoo_data
     # Mostrar un mensaje indicando que las carpetas han sido creadas
     echo 'Se listan las carpetas creadas'
     # Listar las carpetas que contienen '_data' 
