@@ -9,9 +9,9 @@ configure_db() {
     exit 1
   fi
 
-  echo "Se inicializa la base de datos con Docker Compose."
+  echo "Se inicializa la base de datos"
   docker compose up -d
-  sleep 5
+  sleep 3
   docker exec -it odoo odoo \
     --db_host=${POSTGRES_HOST} \
     --db_user=${POSTGRES_USER} \
@@ -20,4 +20,5 @@ configure_db() {
     -i base \
     --without-demo=all \
     --xmlrpc-port=8070
+  docker compose down
 }
