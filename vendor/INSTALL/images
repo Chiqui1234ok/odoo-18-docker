@@ -1,0 +1,12 @@
+#!/bin/bash
+
+configure_images() {
+  echo "Se procede a crear la imagen \"odoo-opam\" (18.0)"
+  sleep 1
+  cd ./images/odoo
+  docker build -t odoo-opam:18 . --no-cache
+  echo "Se procede a crear la imagen \"postgres-opam\" (17.2)"
+  sleep 2
+  cd ../postgres
+  docker build -t postgres-opam:17.2 . --no-cache
+}

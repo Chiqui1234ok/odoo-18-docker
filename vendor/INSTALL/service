@@ -1,0 +1,19 @@
+#!/bin/bash
+
+configure_service() {
+  if [ -f .env ]; then
+    echo "Se cargaron las variables de entorno para conectarse e inicializar la base de datos."
+    source .env
+  else
+    echo "El archivo .env no existe. Por favor crearlo antes de ejecutar el script."
+    exit 1
+  fi
+
+  echo "Copiando el servicio hacia /etc/systemd/system/odoo.service"
+  cp ./services/odoo.service /etc/systemd/system/odoo.service
+
+  echo "Recargando systemd y habilitando el servicio"
+  systemctl daemon-reload
+  systemctl enable odoo.service
+  echo "¡Listo! El servicio se habilitó correctamente."
+}

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+configure_db() {
+  if [ -f .env ]; then
+    echo "Se cargaron las variables de entorno para conectarse e inicializar la base de datos."
+    source .env
+  else
+    echo "El archivo .env no existe. Por favor crearlo antes de ejecutar el script."
+    exit 1
+  fi
+
+  echo "Se inicializa la base de datos con Docker Compose."
+  docker compose up -d
+  sleep 5
+  docker exec -it odoo odoo \
+    --db_host=${POSTGRES_HOST} \
+    --db_user=${POSTGRES_USER} \
+    --db_password=${POSTGRES_PASSWORD} \
+    -d ${POSTGRES_DB} \
+    -i base \
+    --without-demo=all \
+    --xmlrpc-port=8070
+}
