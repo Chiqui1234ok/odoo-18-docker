@@ -5,8 +5,9 @@ configure_folders() {
 
   # Crear carpetas para odoo. No arrojará error si la carpeta ya existe (no es una inicialización destructiva)
   mkdir -p /home/odoo/data
+  mkdir -p /home/odoo/extra-addons
   chown 2000:2000 -R /home/odoo/data
-  chown 2000:2000 -R /home/odoo/etc
+  chown 2000:2000 -R /home/odoo/extra-addons
   chown 2000:2000 .env
   chmod 770 -R /home/odoo/data
 
