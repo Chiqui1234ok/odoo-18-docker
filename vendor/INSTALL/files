@@ -8,12 +8,12 @@ configure_folders() {
   mkdir -p /home/odoo/extra-addons
   chown 2000:2000 -R /home/odoo/data
   chown 2000:2000 -R /home/odoo/extra-addons
-  chown 2000:2000 .env
+  chown 1000:2000 .env
   chmod 770 -R /home/odoo/data
 
   # Crear carpetas para postgres
   mkdir -p /home/postgres/data
-  chown 2001:2001 -R /home/postgres/data
+  chown 2001:2000 -R /home/postgres/data
   chmod 770 -R /home/postgres/data
 
   echo "Se listan las carpetas creadas"
