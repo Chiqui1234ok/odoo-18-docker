@@ -1,1 +1,1 @@
-# odoo-18-docker
+# Odoo 18
