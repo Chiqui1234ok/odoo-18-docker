@@ -12,5 +12,8 @@ RUN groupadd -g 2001 opam && \
 RUN chown -R opam:opam /var/lib/postgresql/data && \
     chmod -R 770 /var/lib/postgresql/data
 
+RUN chown -R opam:opam /var/run/postgresql && \
+    chmod -R 770 /var/run/postgresql
+
 # Cambiar al usuario "opam"
 USER opam
