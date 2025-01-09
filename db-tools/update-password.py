@@ -3,8 +3,7 @@ import subprocess
 from passlib.context import CryptContext
 from getpass import getpass
 
-# Configuración de variables
-DB_CONTAINER = "db"  # Nombre del contenedor Docker para PostgreSQL
+# ATENCIÓN: ESTE SCRIPT NECESITA ARCHIVO ".env"
 
 # Crear el contexto de hash para Odoo
 pwd_context = CryptContext(schemes=["pbkdf2_sha512"], deprecated="auto")
@@ -19,7 +18,7 @@ try:
         "docker",
         "exec",
         "-i",
-        DB_CONTAINER,
+        os.getenv("POSTGRES_CONTAINER_NAME"),
         "psql",
         "-U",
         os.getenv("POSTGRES_USER"),
@@ -48,7 +47,7 @@ try:
             "docker",
             "exec",
             "-i",
-            DB_CONTAINER,
+            os.getenv("POSTGRES_CONTAINER_NAME"),
             "psql",
             "-U",
             os.getenv("POSTGRES_USER"),
