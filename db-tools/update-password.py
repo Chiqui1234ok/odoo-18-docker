@@ -2,8 +2,10 @@ import os
 import subprocess
 from passlib.context import CryptContext
 from getpass import getpass
+from dotenv import load_dotenv
 
 # ATENCIÓN: ESTE SCRIPT NECESITA ARCHIVO ".env"
+load_dotenv()
 
 # Crear el contexto de hash para Odoo
 pwd_context = CryptContext(schemes=["pbkdf2_sha512"], deprecated="auto")
