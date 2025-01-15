@@ -6,7 +6,7 @@ Requires=docker.service
 [Service]
 Type=oneshot
 WorkingDirectory=/home/sistemas/odoo-18-docker
-ExecStart=/usr/bin/docker compose up -d
+ExecStart=/usr/bin/docker compose up
 ExecStop=/usr/bin/docker compose down
 User=sistemas
 Restart=on-failure
