@@ -12,7 +12,7 @@ def load_env():
 
 # Verificar si las variables necesarias están configuradas
 def validate_env():
-    required_vars = ["POSTGRES_DB", "POSTGRES_USER", "POSTGRES_PASSWORD"]
+    required_vars = ["POSTGRES_DB", "POSTGRES_USER", "POSTGRES_PASSWORD", "POSTGRES_CONTAINER_NAME"]
     missing_vars = [var for var in required_vars if var not in os.environ]
     if missing_vars:
         print(f"Faltan las siguientes variables en el archivo .env: {', '.join(missing_vars)}")
@@ -21,7 +21,7 @@ def validate_env():
 
 # Ejecutar el comando para conectarse al contenedor
 def connect_to_postgres():
-    container_name = "postgre"  # Nombre del contenedor Docker
+    container_name = os.getenv("POSTGRES_CONTAINER_NAME")
     postgres_db = os.getenv("POSTGRES_DB")
     postgres_user = os.getenv("POSTGRES_USER")
 
